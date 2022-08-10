@@ -11,14 +11,21 @@ class Training:
                  duration: float,
                  weight: float,
                  ) -> None:
+        self.action = action
+        self.duration = duration
+        self.weight = weight
+        self.LEN_STEP = 0.65
+        self.M_IN_KM = 1000
         pass
 
     def get_distance(self) -> float:
         """Получить дистанцию в км."""
+        return self.action * self.LEN_STEP / self.M_IN_KM
         pass
 
     def get_mean_speed(self) -> float:
         """Получить среднюю скорость движения."""
+        return self.get_distance() / self.duration
         pass
 
     def get_spent_calories(self) -> float:
@@ -32,12 +39,33 @@ class Training:
 
 class Running(Training):
     """Тренировка: бег."""
+
+    coeff_calorie_1: int = 18
+    coeff_calorie_2: int = 20
+
+    def get_spent_calories(self) -> float:
+        return (self.coeff_calorie_1 * self.get_mean_speed() - self.coeff_calorie_2) * self.weight / self.M_IN_KM * self.duration
+
     pass
 
 
 class SportsWalking(Training):
     """Тренировка: спортивная ходьба."""
-    pass
+
+    coeff_calorie_1: int = 0.035
+    coeff_calorie_2: int = 0.029
+
+    def __init__(self,
+                 action: int,
+                 duration: float,
+                 weight: float,
+                 height: float) -> None:
+        super().__init__(action, duration, weight)
+        self.height = height
+
+
+    def get_spent_calories(self) -> float:
+        pass
 
 
 class Swimming(Training):
