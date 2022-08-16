@@ -25,6 +25,7 @@ class Training:
     """Базовый класс тренировки."""
     M_IN_KM: int = 1000
     LEN_STEP: float = 0.65
+    TRAINING_TYPE = ''
 
     def __init__(self,
                  action: int,
@@ -51,11 +52,12 @@ class Training:
         """Вернуть информационное сообщение о выполненной тренировке."""
         info_message = InfoMessage(self.__class__.__name__,
                                    self.duration,
-                                   self.get_spent_calories(),
                                    self.get_distance(),
                                    self.get_mean_speed(),
-                                   )
+                                   self.get_spent_calories())
         return info_message
+
+
 class Running(Training):
     """Тренировка: бег."""
 
