@@ -60,13 +60,12 @@ class Training:
 
 class Running(Training):
     """Тренировка: бег."""
-
     CL_RUN_1: int = 18
     CL_RUN_2: int = 20
     TRAINING_TYPE = 'RUN'
 
     def get_spent_calories(self) -> float:
-        return (self.CL_RUN_1 * self.get_mean_speed() - self.CL_RUN_2) \
+        return (self.CL_RUN_1 * self.get_mean_speed() - self.CL_RUN_2)\
                * self.weight / self.M_IN_KM * self.duration * 60
 
 
@@ -85,13 +84,13 @@ class SportsWalking(Training):
         self.height = height
 
     def get_spent_calories(self) -> float:
-        return (self.CL_WAL_1 * self.weight + (self.get_mean_speed() ** 2 // self.height)
+        return (self.CL_WAL_1 * self.weight +
+                (self.get_mean_speed() ** 2 // self.height)
                 * self.CL_WAL_2 * self.weight) * self.duration * 60
 
 
 class Swimming(Training):
     """Тренировка: плавание."""
-
     CL_SWI = 1.1
     LEN_STEP: float = 1.38
     TRAINING_TYPE = 'SWM'
